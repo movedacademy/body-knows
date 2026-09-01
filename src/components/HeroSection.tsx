@@ -52,14 +52,28 @@ export function HeroSection({
         className="absolute inset-0"
         style={reduce ? undefined : { scale }}
       >
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[center_20%]"
-        />
+        {image.video && !reduce ? (
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={image.src}
+            aria-hidden
+          >
+            <source src={image.video} type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[center_30%]"
+          />
+        )}
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-olive via-olive/45 to-olive/20" />
 

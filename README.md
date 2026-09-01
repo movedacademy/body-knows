@@ -35,9 +35,9 @@ npm run build
 
 Copy, navigation, FAQs, media, and retreat logistics live in `src/content/`. Swap these modules for a CMS later without rewriting page layouts.
 
-To publish confirmed immersion logistics, add an object to `src/content/retreats.ts`. The site will not display dates, location, price, or capacity unless they are present.
+Photography is sourced from the BODY KNOWS Drive archive (session stills and video). Web-ready files live in `public/images` and `public/videos`.
 
-The founder portrait in `public/images/founder-portrait.jpg` is a stand-in and should be replaced with Richard’s own photograph.
+To publish confirmed immersion logistics, add an object to `src/content/retreats.ts`. The site will not display dates, location, price, or capacity unless they are present.
 
 ## Forms
 

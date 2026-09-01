@@ -20,7 +20,7 @@ export default function AboutPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-top grayscale"
+          className="object-cover object-[center_40%] grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-olive via-olive/50 to-olive/25" />
         <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-[1440px] flex-col justify-end px-5 py-16 sm:px-8 lg:px-12">

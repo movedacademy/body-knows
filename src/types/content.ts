@@ -11,6 +11,7 @@ export type Cta = {
 export type MediaAsset = {
   src: string;
   alt: string;
+  video?: string;
   width?: number;
   height?: number;
 };
