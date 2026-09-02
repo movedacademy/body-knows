@@ -33,13 +33,13 @@ export function Navigation() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
+        "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-colors duration-500",
         solid ? "bg-chalk/95 text-olive shadow-[0_1px_0_rgba(40,53,45,0.08)] backdrop-blur-md" : "bg-transparent text-chalk",
       )}
     >
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-4 sm:px-8 lg:px-12"
+        className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-4 min-[375px]:px-6 sm:px-8 lg:px-12"
       >
         <Link href="/" className="eyebrow text-current">
           {site.name}

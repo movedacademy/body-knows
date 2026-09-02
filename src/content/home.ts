@@ -3,9 +3,8 @@ import type { ExploreItem, ExperienceVisual } from "@/types/content";
 
 export const home = {
   hero: {
-    eyebrow: "BODY KNOWS",
-    titleLines: ["Movement.", "Breath.", "Transformation."],
-    supporting: "Your body knows things your mind hasn’t figured out yet.",
+    descriptor: "Movement. Breath. Transformation.",
+    title: "Your body knows things your mind hasn’t figured out yet.",
     body: "An immersive experience for people who know something needs to change—but haven’t been able to change it through thinking alone.",
     primaryCta: {
       label: "APPLY FOR THE NEXT IMMERSION",

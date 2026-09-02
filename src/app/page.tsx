@@ -24,9 +24,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection
-        eyebrow={home.hero.eyebrow}
-        title={home.hero.titleLines}
-        supporting={home.hero.supporting}
+        descriptor={home.hero.descriptor}
+        title={home.hero.title}
         body={home.hero.body}
         image={home.hero.image}
         primaryCta={home.hero.primaryCta}
