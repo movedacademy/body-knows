@@ -4,7 +4,6 @@ import { apply } from "@/content/apply";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
 const SEND_ERROR = "We couldn’t send your message right now. Please try again.";
-const CONTACT_ERROR = "Please provide an email address or phone number.";
 
 export function WaitlistForm() {
   const [fullName, setFullName] = useState("");
@@ -31,9 +30,6 @@ export function WaitlistForm() {
     if (missing.length > 0) {
       setInvalidFields(missing);
       document.getElementById(`waitlist-${missing[0]}`)?.focus();
-      if (missing.includes("email")) {
-        return CONTACT_ERROR;
-      }
       return "Please enter your name and email.";
     }
 

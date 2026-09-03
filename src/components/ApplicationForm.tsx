@@ -45,7 +45,10 @@ export function ApplicationForm() {
       } else {
         document.getElementById(`application-${first}`)?.focus();
       }
-      if (missing.includes("email") && missing.includes("phone")) {
+      const onlyContactMissing = missing.every(
+        (name) => name === "email" || name === "phone",
+      );
+      if (onlyContactMissing) {
         return CONTACT_ERROR;
       }
       return "Please complete every field.";
