@@ -1,9 +1,9 @@
 "use client";
 
 import { apply } from "@/content/apply";
+import { FORM_SOURCES, LEAD_SEND_ERROR, submitLead } from "@/lib/submit-lead";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-const SEND_ERROR = "We couldn’t send your message right now. Please try again.";
 const CONTACT_ERROR = "Please provide an email address or phone number.";
 
 export function WaitlistForm() {
@@ -54,37 +54,19 @@ export function WaitlistForm() {
     setStatus("submitting");
 
     try {
-      // Submit through the internal API route so the GoHighLevel webhook URL stays server-side.
-      const response = await fetch("/api/submit-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName,
-          email,
-          phone: "",
-          message: "",
-          website: honeypot,
-          pageUrl: window.location.href,
-        }),
+      await submitLead({
+        fullName,
+        email,
+        form_source: FORM_SOURCES.waitlist,
+        website: honeypot,
       });
-
-      let result: { success?: boolean; error?: string } = {};
-      try {
-        result = (await response.json()) as { success?: boolean; error?: string };
-      } catch {
-        throw new Error(SEND_ERROR);
-      }
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.error ?? SEND_ERROR);
-      }
 
       setStatus("success");
       setFullName("");
       setEmail("");
     } catch (caught) {
       setStatus("error");
-      setError(caught instanceof Error ? caught.message : SEND_ERROR);
+      setError(caught instanceof Error ? caught.message : LEAD_SEND_ERROR);
     }
   }
 

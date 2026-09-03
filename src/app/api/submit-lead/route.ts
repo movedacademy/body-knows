@@ -1,4 +1,5 @@
 import { validateApplication } from "@/lib/forms";
+import { FORM_SOURCES } from "@/lib/lead-constants";
 import {
   LEAD_SEND_ERROR,
   forwardLeadToGhl,
@@ -48,6 +49,12 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
+  }
+
+  if (typeof body.form_source !== "string" || !body.form_source.trim()) {
+    body.form_source = isApplicationPayload(body)
+      ? FORM_SOURCES.apply
+      : FORM_SOURCES.waitlist;
   }
 
   const lead = normalizeLead(body);
