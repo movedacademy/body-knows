@@ -41,11 +41,10 @@ To publish confirmed immersion logistics, add an object to `src/content/retreats
 
 ## Forms
 
-`POST /api/apply` and `POST /api/waitlist` validate submissions and forward them when credentials are present.
+The application and waitlist forms submit to `POST /api/submit-lead`. That Route Handler validates the request and forwards a normalized JSON payload to GoHighLevel. The webhook URL stays server-side.
 
-Copy `.env.example` to `.env.local`:
+Copy `.env.example` to `.env.local` and set:
 
-- `FORM_WEBHOOK_URL` — GoHighLevel inbound webhook or any JSON endpoint
-- `FORM_PROVIDER=hubspot` plus HubSpot portal and form IDs for native HubSpot submissions
+- `GHL_WEBHOOK_URL` — GoHighLevel inbound webhook URL (server-only; configure Preview and Production in Vercel)
 
-Until a provider is configured, submissions are accepted and logged server-side.
+Never prefix this variable with `NEXT_PUBLIC_`. If it is missing, submissions fail with a generic error.

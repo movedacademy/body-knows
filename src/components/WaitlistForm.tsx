@@ -1,7 +1,10 @@
 "use client";
 
 import { apply } from "@/content/apply";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+
+const SEND_ERROR = "We couldn’t send your message right now. Please try again.";
+const CONTACT_ERROR = "Please provide an email address or phone number.";
 
 export function WaitlistForm() {
   const [fullName, setFullName] = useState("");
@@ -11,36 +14,83 @@ export function WaitlistForm() {
     "idle",
   );
   const [error, setError] = useState("");
+  const [invalidFields, setInvalidFields] = useState<string[]>([]);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (error) {
+      errorRef.current?.focus();
+    }
+  }, [error]);
+
+  function validateClient(): string | null {
+    const missing: string[] = [];
+    if (!fullName.trim()) missing.push("fullName");
+    if (!email.trim()) missing.push("email");
+
+    if (missing.length > 0) {
+      setInvalidFields(missing);
+      document.getElementById(`waitlist-${missing[0]}`)?.focus();
+      if (missing.includes("email")) {
+        return CONTACT_ERROR;
+      }
+      return "Please enter your name and email.";
+    }
+
+    setInvalidFields([]);
+    return null;
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const validationError = validateClient();
+    if (validationError) {
+      setStatus("error");
+      setError(validationError);
+      return;
+    }
+
     setError("");
     setStatus("submitting");
 
     try {
-      const response = await fetch("/api/waitlist", {
+      // Submit through the internal API route so the GoHighLevel webhook URL stays server-side.
+      const response = await fetch("/api/submit-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, email, website: honeypot }),
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone: "",
+          message: "",
+          website: honeypot,
+          pageUrl: window.location.href,
+        }),
       });
-      const result = (await response.json()) as { ok: boolean; error?: string };
 
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error ?? "Unable to join the waitlist.");
+      let result: { success?: boolean; error?: string } = {};
+      try {
+        result = (await response.json()) as { success?: boolean; error?: string };
+      } catch {
+        throw new Error(SEND_ERROR);
+      }
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error ?? SEND_ERROR);
       }
 
       setStatus("success");
+      setFullName("");
+      setEmail("");
     } catch (caught) {
       setStatus("error");
-      setError(
-        caught instanceof Error ? caught.message : "Unable to join the waitlist.",
-      );
+      setError(caught instanceof Error ? caught.message : SEND_ERROR);
     }
   }
 
   if (status === "success") {
     return (
-      <div>
+      <div aria-live="polite">
         <h3 className="font-heading text-3xl">{apply.waitlist.confirmation.title}</h3>
         <p className="mt-4 max-w-lg text-olive/80">
           {apply.waitlist.confirmation.body}
@@ -50,7 +100,15 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-xl space-y-8" noValidate>
+    <form
+      onSubmit={onSubmit}
+      className="max-w-xl space-y-8"
+      noValidate
+      aria-busy={status === "submitting"}
+    >
+      <p className="sr-only" aria-live="polite">
+        {status === "submitting" ? "Sending your message." : ""}
+      </p>
       <p className="sr-only">
         Do not fill the following field.
         <input
@@ -63,6 +121,7 @@ export function WaitlistForm() {
       </p>
       {apply.waitlist.fields.map((field) => {
         const id = `waitlist-${field.name}`;
+        const fieldInvalid = invalidFields.includes(field.name);
         return (
           <label key={field.name} htmlFor={id} className="block">
             <span className="eyebrow text-olive/70">{field.label}</span>
@@ -73,6 +132,8 @@ export function WaitlistForm() {
               required={field.required}
               autoComplete={field.autoComplete}
               value={field.name === "email" ? email : fullName}
+              aria-invalid={fieldInvalid || undefined}
+              aria-describedby={fieldInvalid ? "waitlist-form-error" : undefined}
               onChange={(event) =>
                 field.name === "email"
                   ? setEmail(event.target.value)
@@ -84,7 +145,13 @@ export function WaitlistForm() {
         );
       })}
       {error ? (
-        <p role="alert" className="text-sm text-terra">
+        <p
+          id="waitlist-form-error"
+          ref={errorRef}
+          role="alert"
+          tabIndex={-1}
+          className="text-sm text-terra"
+        >
           {error}
         </p>
       ) : null}
