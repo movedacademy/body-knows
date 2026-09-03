@@ -41,10 +41,20 @@ To publish confirmed immersion logistics, add an object to `src/content/retreats
 
 ## Forms
 
-The application and waitlist forms submit to `POST /api/submit-lead`. That Route Handler validates the request and forwards a normalized JSON payload to GoHighLevel. The webhook URL stays server-side.
+The application and waitlist forms submit to `POST /api/submit-lead`. That Route Handler validates the request and forwards this JSON payload to GoHighLevel:
 
-Copy `.env.example` to `.env.local` and set:
+```json
+{
+  "first_name": "",
+  "last_name": "",
+  "email": "",
+  "phone": "",
+  "message": "",
+  "form_source": "apply_form",
+  "page_url": "https://bodyknowsexperience.com/apply"
+}
+```
 
-- `GHL_WEBHOOK_URL` — GoHighLevel inbound webhook URL (server-only; configure Preview and Production in Vercel)
+`form_source` is `apply_form` or `waitlist_form`. The webhook URL stays server-side and is already configured. Override it with `GHL_WEBHOOK_URL` only if you need a different destination.
 
-Never prefix this variable with `NEXT_PUBLIC_`. If it is missing, submissions fail with a generic error.
+Never prefix this variable with `NEXT_PUBLIC_`.

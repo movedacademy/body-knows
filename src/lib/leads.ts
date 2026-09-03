@@ -1,14 +1,17 @@
+export { FORM_SOURCES, LEAD_SEND_ERROR, type FormSource } from "@/lib/lead-constants";
+
 export type LeadPayload = {
-  fullName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
   message: string;
-  pageUrl: string;
-  submittedAt: string;
+  form_source: string;
+  page_url: string;
 };
 
-export const LEAD_SEND_ERROR =
-  "We couldn’t send your message right now. Please try again.";
+export const DEFAULT_GHL_WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/zoWuu8eRHZNMHlduLFZp/webhook-trigger/28e22c0d-9642-4dfc-b98d-0905a981a756";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,6 +35,22 @@ function isEmail(value: string): boolean {
   return EMAIL_PATTERN.test(value);
 }
 
+function splitName(fullName: string): { first_name: string; last_name: string } {
+  const parts = fullName.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) {
+    return { first_name: "", last_name: "" };
+  }
+
+  if (parts.length === 1) {
+    return { first_name: parts[0], last_name: "" };
+  }
+
+  return {
+    first_name: parts[0],
+    last_name: parts.slice(1).join(" "),
+  };
+}
+
 function composeMessage(input: Record<string, unknown>): string {
   const direct = asTrimmedString(input.message);
   if (direct) {
@@ -48,9 +67,14 @@ export function normalizeLead(
   input: Record<string, unknown>,
 ): { ok: true; data: LeadPayload } | { ok: false; error: string } {
   const fullName = asTrimmedString(input.fullName);
+  const split = splitName(fullName);
+  const first_name = asTrimmedString(input.first_name) || split.first_name;
+  const last_name = asTrimmedString(input.last_name) || split.last_name;
   const email = asTrimmedString(input.email);
   const phone = asTrimmedString(input.phone);
-  const pageUrl = asTrimmedString(input.pageUrl);
+  const page_url =
+    asTrimmedString(input.page_url) || asTrimmedString(input.pageUrl);
+  const form_source = asTrimmedString(input.form_source);
   const message = composeMessage(input);
 
   if (!email && !phone) {
@@ -67,23 +91,20 @@ export function normalizeLead(
   return {
     ok: true,
     data: {
-      fullName,
+      first_name,
+      last_name,
       email,
       phone,
       message,
-      pageUrl,
-      submittedAt: new Date().toISOString(),
+      form_source,
+      page_url,
     },
   };
 }
 
 export async function forwardLeadToGhl(payload: LeadPayload): Promise<void> {
-  const webhookUrl = process.env.GHL_WEBHOOK_URL?.trim();
-
-  if (!webhookUrl) {
-    console.error("[body-knows] GHL webhook is not configured");
-    throw new Error("missing-webhook");
-  }
+  const webhookUrl =
+    process.env.GHL_WEBHOOK_URL?.trim() || DEFAULT_GHL_WEBHOOK_URL;
 
   try {
     new URL(webhookUrl);
@@ -92,7 +113,6 @@ export async function forwardLeadToGhl(payload: LeadPayload): Promise<void> {
     throw new Error("missing-webhook");
   }
 
-  // Forward the sanitized payload to GoHighLevel's inbound webhook.
   const response = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
