@@ -3,23 +3,25 @@ import type { FaqItem, MediaAsset } from "@/types/content";
 
 /**
  * Photography for this page comes from the BODY KNOWS Drive folder
- * "Italia - June 2026" (id 1xpQz06K-oLn-DZWsWykw_K4kqAEjm65h).
+ * "Italy Retreat 2027" (id 1uZbnHmy3rhOX28ytem-KTjaE9mHJljFO).
  * Web files live in public/images/italy. EXIF, including location, is stripped.
  *
  * Slot map (Drive filename → public file):
- * - C62AAFF1-F87D-48B9-A5CC-9806C888F469.JPG → hero.jpg (Open Graph source)
- * - IMG_6100.JPG → hero-mobile.jpg
- * - IMG_6024.JPG → opening.jpg
- * - IMG_5968.JPG → movement.jpg
- * - IMG_6265.JPG → breath.jpg
- * - IMG_6018.JPG → challenge.jpg
- * - IMG_6047.JPG → individual.jpg
- * - IMG_6028.JPG → reflection.jpg
- * - 2DB1B4DE-908C-4200-A8E2-90D22B1B8908.JPG → place-terrace.jpg
- * - IMG_6053.JPG → place-seated.jpg
- * - IMG_6248.JPG → place-hills.jpg (source file is smaller than the others)
- * - IMG_6008.JPG → place-stone.jpg
- * - IMG_5963.JPG → final.jpg
+ * - facade.avif → hero.jpg (also the mobile hero and Open Graph source)
+ * - Copy of IMG_6024.JPG → opening.jpg
+ * - Copy of IMG_5992.JPG → movement.jpg
+ * - Copy of IMG_6050.JPG → breath.jpg
+ * - Copy of IMG_6022.JPG → challenge.jpg
+ * - Copy of IMG_5927.JPG → individual.jpg
+ * - Copy of IMG_6028.JPG → reflection.jpg
+ * - exterior 2.avif → place-house.jpg
+ * - balcony.avif → place-balcony.jpg
+ * - dining tble.avif → place-communal.jpg
+ * - arial view.avif → place-land.jpg
+ * - views!!!.avif → final.jpg
+ *
+ * Several property files in that folder are already small exports
+ * (720px or 1200px on the long edge). They are used as supplied.
  *
  * Founder portrait is the existing confirmed photograph of Richard Aceves.
  * The Drive folder has no file identified as him.
@@ -50,13 +52,13 @@ export const italy = {
     secondaryCta: { label: "EXPLORE THE EXPERIENCE", href: "#experience" },
     image: italyImage(
       "/images/italy/hero.jpg",
-      "Participants lying on a stone terrace in the hills, working with breath while a facilitator stands nearby.",
-      "object-[center_42%]",
+      "Stone facade of the house in Cossano, with a wooden door, a bench, and shuttered windows in hard daylight.",
+      "object-center",
     ),
     mobileImage: italyImage(
-      "/images/italy/hero-mobile.jpg",
-      "A participant crouched over a sandbag on a grassy slope, another person resting behind him, wooded hills beyond.",
-      "object-[center_30%]",
+      "/images/italy/hero.jpg",
+      "Stone facade of the house in Cossano, with a wooden door, a bench, and shuttered windows in hard daylight.",
+      "object-center",
     ),
   },
   opening: {
@@ -68,8 +70,8 @@ export const italy = {
     ],
     image: italyImage(
       "/images/italy/opening.jpg",
-      "A close view of a participant with a hand against his face, seated above a wooded valley.",
-      "object-[70%_center]",
+      "A close view of a man with his hand against his face, seated above wooded hills.",
+      "object-[center_58%] lg:object-center",
     ),
   },
   definition: {
@@ -103,8 +105,8 @@ export const italy = {
         body: "Not fitness or performance; a pathway to awareness.",
         image: italyImage(
           "/images/italy/movement.jpg",
-          "A participant in a wide stance on a grassy slope, working with movement against a forested hillside.",
-          "object-[center_82%]",
+          "A man lifting a sandbag overhead on a grassy slope, trees and hills behind him.",
+          "object-center",
         ),
         span: "lg:col-span-7",
       },
@@ -113,8 +115,8 @@ export const italy = {
         body: "An entry point into attention and presence.",
         image: italyImage(
           "/images/italy/breath.jpg",
-          "A person lying on dry grass with arms open, hills beyond a wooden fence.",
-          "object-[center_58%]",
+          "People sitting on the grass at the edge of a stone terrace, facing wooded hills.",
+          "object-[center_62%]",
         ),
         span: "lg:col-span-5",
       },
@@ -123,8 +125,8 @@ export const italy = {
         body: "A chance to notice resistance, control, avoidance, and choice.",
         image: italyImage(
           "/images/italy/challenge.jpg",
-          "A close view of a participant folded forward in physical effort, hills behind.",
-          "object-[center_40%]",
+          "A man pressing a sandbag overhead beside a vineyard, another person's hands visible in the foreground.",
+          "object-[center_30%]",
         ),
         span: "lg:col-span-4",
       },
@@ -133,8 +135,8 @@ export const italy = {
         body: "Each person’s experience is different.",
         image: italyImage(
           "/images/italy/individual.jpg",
-          "A person sitting alone under a tree, facing a wooded valley.",
-          "object-[center_45%]",
+          "A person writing in a notebook outdoors, seen from above, in hard sunlight.",
+          "object-[center_58%]",
         ),
         span: "lg:col-span-4",
       },
@@ -143,8 +145,8 @@ export const italy = {
         body: "Space to make meaning of what you experienced.",
         image: italyImage(
           "/images/italy/reflection.jpg",
-          "A participant writing at a wooden table beneath a stone arch, looking toward the hills.",
-          "object-[center_42%]",
+          "A man writing in a notebook at a wooden table beneath a brick arch, hills beyond.",
+          "object-center",
         ),
         span: "lg:col-span-4",
       },
@@ -169,24 +171,24 @@ export const italy = {
     note: "Full travel and practical details will be shared with accepted applicants.",
     images: [
       italyImage(
-        "/images/italy/place-terrace.jpg",
-        "Participants on a stone terrace above the hills, between efforts.",
-        "object-[center_45%]",
+        "/images/italy/place-house.jpg",
+        "The stone house in Cossano, with a tiled roof, above a gravel court and vineyards.",
+        "object-[center_34%] sm:object-[center_26%] lg:object-[center_36%]",
       ),
       italyImage(
-        "/images/italy/place-hills.jpg",
-        "Wooded hills and vine rows outside Cossano.",
+        "/images/italy/place-balcony.jpg",
+        "A covered stone walkway with folding chairs and hard afternoon shadow.",
         "object-center",
       ),
       italyImage(
-        "/images/italy/place-stone.jpg",
-        "Cracked stone paving in hard daylight.",
-        "object-center",
+        "/images/italy/place-communal.jpg",
+        "A long wooden table in a room with stone columns and tall windows looking onto trees.",
+        "object-bottom",
       ),
       italyImage(
-        "/images/italy/place-seated.jpg",
-        "People sitting along a fence line, facing the valley.",
-        "object-center",
+        "/images/italy/place-land.jpg",
+        "Terraced vineyards and wooded hills in low light, with a small stone building on the ridge.",
+        "object-[center_62%]",
       ),
     ],
   },
@@ -243,8 +245,8 @@ export const italy = {
     cta: { label: "APPLY FOR ITALY", href: "#apply" },
     image: italyImage(
       "/images/italy/final.jpg",
-      "A participant standing with his back to the camera, looking out over the hills.",
-      "object-[center_22%]",
+      "Vineyard rows and layered hills under a bright sun.",
+      "object-[center_68%]",
     ),
   },
 };

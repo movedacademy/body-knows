@@ -292,7 +292,7 @@ export default function ItalyPage() {
                 sizes="(min-width: 1024px) 58vw, 100vw"
               />
             </Reveal>
-            <div className="col-span-12 grid grid-cols-2 gap-3 lg:col-span-5 lg:grid-cols-1">
+            <div className="col-span-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
               <Reveal className="relative aspect-[4/5] lg:aspect-auto lg:min-h-[38vh]">
                 <FramedImage
                   image={italy.place.images[1]}
