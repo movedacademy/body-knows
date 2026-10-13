@@ -30,6 +30,7 @@ npm run build
 - `/about` — Richard Aceves
 - `/faq` — FAQ
 - `/apply` — Application and waitlist
+- `/italy` — BODY KNOWS Italy, July 5–9, 2027
 
 ## Content and CMS-ready architecture
 

@@ -5,7 +5,33 @@ import { cn } from "@/lib/cn";
 import { site } from "@/content/site";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+
+function HeaderCta({
+  href,
+  className,
+  children,
+  onClick,
+}: {
+  href: string;
+  className: string;
+  children: ReactNode;
+  onClick?: () => void;
+}) {
+  if (href.startsWith("#")) {
+    return (
+      <a href={href} className={className} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
 
 export function Navigation() {
   const pathname = usePathname();
@@ -29,6 +55,10 @@ export function Navigation() {
 
   const solid = scrolled || !isHome || open;
   const { links, primaryCta, secondaryCta } = site.navigation;
+  const isItaly = pathname === "/italy";
+  const headerCta = isItaly
+    ? { label: "APPLY FOR ITALY", href: "#apply" }
+    : primaryCta;
 
   return (
     <header
@@ -41,11 +71,11 @@ export function Navigation() {
         aria-label="Primary"
         className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-4 min-[375px]:px-6 sm:px-8 lg:px-12"
       >
-        <Link href="/" className="eyebrow text-current">
+        <Link href="/" className="eyebrow shrink-0 text-current">
           {site.name}
         </Link>
 
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden items-center gap-x-4 lg:flex xl:gap-x-8">
           {links.map((link) => {
             const active =
               link.href === pathname ||
@@ -58,7 +88,7 @@ export function Navigation() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "text-[12px] tracking-[0.16em] uppercase transition-opacity hover:opacity-100",
+                    "text-[12px] tracking-[0.14em] whitespace-nowrap uppercase transition-opacity hover:opacity-100 xl:tracking-[0.16em]",
                     active ? "opacity-100" : "opacity-70",
                   )}
                 >
@@ -72,33 +102,36 @@ export function Navigation() {
         <div className="hidden items-center gap-5 lg:flex">
           <Link
             href={secondaryCta.href}
-            className="text-[11px] tracking-[0.22em] uppercase opacity-80 transition-opacity hover:opacity-100"
+            className={cn(
+              "text-[11px] tracking-[0.18em] whitespace-nowrap uppercase opacity-80 transition-opacity hover:opacity-100 xl:tracking-[0.22em]",
+              isItaly && "hidden xl:inline",
+            )}
           >
             {secondaryCta.label}
           </Link>
-          <Link
-            href={primaryCta.href}
+          <HeaderCta
+            href={headerCta.href}
             className={cn(
-              "px-5 py-2.5 text-[11px] tracking-[0.28em] uppercase transition-colors",
+              "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.22em] whitespace-nowrap uppercase transition-colors xl:px-5 xl:tracking-[0.28em]",
               solid
                 ? "bg-olive text-chalk hover:bg-olive/90"
                 : "bg-chalk text-olive hover:bg-stone",
             )}
           >
-            {primaryCta.label}
-          </Link>
+            {headerCta.label}
+          </HeaderCta>
         </div>
 
         <div className="flex items-center gap-3 lg:hidden">
-          <Link
-            href={primaryCta.href}
+          <HeaderCta
+            href={headerCta.href}
             className={cn(
-              "px-4 py-2 text-[10px] tracking-[0.24em] uppercase",
+              "px-2.5 py-2 text-[9px] tracking-[0.12em] whitespace-nowrap uppercase min-[400px]:px-3 min-[400px]:text-[10px] min-[400px]:tracking-[0.16em]",
               solid ? "bg-olive text-chalk" : "bg-chalk text-olive",
             )}
           >
-            {primaryCta.label}
-          </Link>
+            {headerCta.label}
+          </HeaderCta>
           <button
             type="button"
             className="flex h-11 w-11 items-center justify-center"
@@ -154,13 +187,13 @@ export function Navigation() {
             ))}
           </ul>
           <div className="mt-12 flex flex-col gap-3">
-            <Link
-              href={primaryCta.href}
+            <HeaderCta
+              href={headerCta.href}
               className="bg-chalk px-5 py-4 text-center text-[11px] tracking-[0.28em] uppercase text-olive"
               onClick={() => setOpen(false)}
             >
-              {primaryCta.label}
-            </Link>
+              {headerCta.label}
+            </HeaderCta>
             <Link
               href={secondaryCta.href}
               className="border border-chalk/40 px-5 py-4 text-center text-[11px] tracking-[0.22em] uppercase"

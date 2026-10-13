@@ -64,15 +64,22 @@ export function CtaLink({
       "bg-chalk text-olive hover:bg-stone border border-chalk",
   } as const;
 
+  const classes = cn(
+    "inline-flex items-center justify-center px-6 py-3.5 text-[11px] tracking-[0.28em] uppercase font-medium transition-colors duration-300",
+    styles[variant],
+    className,
+  );
+
+  if (href.startsWith("#")) {
+    return (
+      <a href={href} className={classes}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className={cn(
-        "inline-flex items-center justify-center px-6 py-3.5 text-[11px] tracking-[0.28em] uppercase font-medium transition-colors duration-300",
-        styles[variant],
-        className,
-      )}
-    >
+    <Link href={href} className={classes}>
       {children}
     </Link>
   );
