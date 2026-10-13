@@ -332,7 +332,7 @@ export default function ItalyPage() {
             <FramedImage
               image={italy.founder.image}
               sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-[center_40%]"
+              className="object-center"
             />
           </Reveal>
           <div className="flex flex-col justify-center px-5 py-16 min-[375px]:px-6 sm:px-10 lg:col-span-5 lg:px-14 lg:py-24">

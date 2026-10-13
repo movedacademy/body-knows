@@ -1,4 +1,3 @@
-import { media } from "@/content/media";
 import type { FaqItem, MediaAsset } from "@/types/content";
 
 /**
@@ -23,8 +22,8 @@ import type { FaqItem, MediaAsset } from "@/types/content";
  * Several property files in that folder are already small exports
  * (720px or 1200px on the long edge). They are used as supplied.
  *
- * Founder portrait is the existing confirmed photograph of Richard Aceves.
- * The Drive folder has no file identified as him.
+ * Founder portrait is Drive file 1_nr4lgph3ODZ27dJI6Byttz7-GuWKXfC
+ * (Richard Aceves), saved as founder.jpg. The shared site portrait is unchanged.
  */
 const italyImage = (
   src: string,
@@ -195,7 +194,11 @@ export const italy = {
   founder: {
     headline: "LED BY RICHARD ACEVES",
     body: "Richard works at the intersection of movement, physical challenge, breath, and human behavior. BODY KNOWS is built around a simple premise: insight matters, but experience can reveal what thought alone cannot.",
-    image: media.founder,
+    image: italyImage(
+      "/images/italy/founder.jpg",
+      "Richard Aceves sitting with a small group in a bright room, turned toward the people in front of him.",
+      "object-center",
+    ),
   },
   apply: {
     id: "apply",
