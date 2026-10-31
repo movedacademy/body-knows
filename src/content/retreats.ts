@@ -16,4 +16,15 @@ import type { Retreat } from "@/types/content";
  *   location: "To be announced",
  * }
  */
-export const retreats: Retreat[] = [];
+export const retreats: Retreat[] = [
+  {
+    id: "italy-2027",
+    name: "BODY KNOWS Italy",
+    status: "upcoming",
+    startDate: "2027-07-05",
+    endDate: "2027-07-09",
+    location: "Cossano, Italy",
+    href: "/italy",
+    applyHref: "/italy#apply",
+  },
+];

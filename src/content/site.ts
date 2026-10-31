@@ -7,13 +7,15 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bodyknows.com",
   navigation: {
     links: [
+      { label: "Italy 2027", href: "/italy" },
       { label: "Experience", href: "/experience" },
       { label: "Who It’s For", href: "/#who-its-for" },
       { label: "About Richard", href: "/about" },
       { label: "FAQ", href: "/faq" },
       { label: "Apply", href: "/apply" },
     ] satisfies NavLink[],
-    primaryCta: { label: "APPLY", href: "/apply" } satisfies Cta,
+    primaryCta: { label: "APPLY FOR ITALY", href: "/italy#apply" } satisfies Cta,
+    restingCta: { label: "APPLY", href: "/apply" } satisfies Cta,
     secondaryCta: {
       label: "EXPLORE THE EXPERIENCE",
       href: "/experience",
@@ -23,6 +25,7 @@ export const site = {
     wordmark: "BODY KNOWS",
     line: "Movement. Breath. Transformation.",
     links: [
+      { label: "Italy 2027", href: "/italy" },
       { label: "Experience", href: "/experience" },
       { label: "About Richard", href: "/about" },
       { label: "FAQ", href: "/faq" },

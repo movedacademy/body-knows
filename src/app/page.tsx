@@ -3,23 +3,38 @@ import { CtaLink, Reveal } from "@/components/Reveal";
 import { EditorialStatement } from "@/components/EditorialStatement";
 import { ExperienceGrid } from "@/components/ExperienceGrid";
 import { ExploreCards } from "@/components/ExploreCards";
+import { FeaturedEvent } from "@/components/FeaturedEvent";
 import { FounderSection } from "@/components/FounderSection";
 import { HeroSection } from "@/components/HeroSection";
 import { RetreatDetails } from "@/components/RetreatDetails";
 import { SectionLabel } from "@/components/SectionLabel";
 import { home } from "@/content/home";
 import { site } from "@/content/site";
-import { getNextImmersion } from "@/lib/cms";
+import { getFeaturedEvent, withFeaturedDescription } from "@/lib/cms";
 import type { Metadata } from "next";
 import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: site.metadata.homeTitle,
-  description: site.metadata.homeDescription,
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: site.metadata.homeTitle,
+    description: withFeaturedDescription(
+      site.metadata.homeDescription,
+      getFeaturedEvent(),
+    ),
+  };
+}
 
 export default function HomePage() {
-  const nextImmersion = getNextImmersion();
+  const event = getFeaturedEvent();
+  const heroPrimary = event
+    ? { label: event.applyLabel, href: event.applyHref }
+    : home.hero.restingCta;
+  const applicationPrimary = event
+    ? { label: event.applyLabel, href: event.applyHref }
+    : home.application.restingCta;
+  const applicationSecondary = event
+    ? { label: event.waitlistLabel, href: home.application.secondaryCta.href }
+    : home.application.restingSecondaryCta;
 
   return (
     <>
@@ -27,15 +42,19 @@ export default function HomePage() {
         descriptor={home.hero.descriptor}
         title={home.hero.title}
         body={home.hero.body}
+        detail={event?.heroDetail}
         image={home.hero.image}
-        primaryCta={home.hero.primaryCta}
+        primaryCta={heroPrimary}
         secondaryCta={home.hero.secondaryCta}
+        clearance={event ? "announcement" : "header"}
       />
 
       <EditorialStatement
         statement={home.tension.statement}
         body={home.tension.body}
       />
+
+      <FeaturedEvent />
 
       <section className="bg-chalk px-5 pb-10 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-[1440px]">
@@ -149,16 +168,20 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-12">
             <RetreatDetails
-              retreat={nextImmersion}
+              retreat={event?.retreat ?? null}
               comingSoonLabel={home.application.comingSoon}
             />
           </div>
-          <Reveal delay={0.12} className="mt-12 flex flex-col gap-3 sm:flex-row">
-            <CtaLink href={home.application.primaryCta.href}>
-              {home.application.primaryCta.label}
+          <Reveal delay={0.12} className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <CtaLink href={applicationPrimary.href} className="w-full sm:w-auto">
+              {applicationPrimary.label}
             </CtaLink>
-            <CtaLink href={home.application.secondaryCta.href} variant="ghost">
-              {home.application.secondaryCta.label}
+            <CtaLink
+              href={applicationSecondary.href}
+              variant="ghost"
+              className="w-full text-center whitespace-normal sm:w-auto"
+            >
+              {applicationSecondary.label}
             </CtaLink>
           </Reveal>
         </div>

@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/Reveal";
-import { hasConfirmedLogistics } from "@/lib/cms";
+import { formatRetreatDateRange, hasConfirmedLogistics } from "@/lib/cms";
 import type { Retreat } from "@/types/content";
 
 type RetreatDetailsProps = {
@@ -7,17 +7,6 @@ type RetreatDetailsProps = {
   comingSoonLabel: string;
   tone?: "olive" | "chalk";
 };
-
-function formatDate(value?: string) {
-  if (!value) return null;
-  const date = new Date(`${value}T00:00:00`);
-  if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat("en", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
-}
 
 export function RetreatDetails({
   retreat,
@@ -37,9 +26,7 @@ export function RetreatDetails({
   const details = [
     {
       label: "Dates",
-      value: [formatDate(retreat?.startDate), formatDate(retreat?.endDate)]
-        .filter(Boolean)
-        .join(" – "),
+      value: formatRetreatDateRange(retreat?.startDate, retreat?.endDate),
     },
     { label: "Location", value: retreat?.location },
     { label: "Investment", value: retreat?.price },

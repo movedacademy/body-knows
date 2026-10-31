@@ -17,6 +17,8 @@ type HeroSectionProps = {
   image: MediaAsset;
   primaryCta?: Cta;
   secondaryCta?: Cta;
+  detail?: string;
+  clearance?: "header" | "announcement";
   size?: "full" | "page";
   align?: "start" | "end";
 };
@@ -34,6 +36,8 @@ export function HeroSection({
   image,
   primaryCta,
   secondaryCta,
+  detail,
+  clearance = "header",
   size = "full",
   align = "end",
 }: HeroSectionProps) {
@@ -92,7 +96,9 @@ export function HeroSection({
           "relative z-10 mx-auto flex h-full w-full max-w-[1440px] flex-col",
           "px-5 min-[375px]:px-6 sm:px-8 lg:px-12",
           size === "full" ? "min-h-[100svh]" : "min-h-[78svh]",
-          "pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pt-[calc(6.25rem+env(safe-area-inset-top,0px))]",
+          clearance === "announcement"
+            ? "pt-[calc(8.25rem+env(safe-area-inset-top,0px))] sm:pt-[calc(8rem+env(safe-area-inset-top,0px))]"
+            : "pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pt-[calc(6.25rem+env(safe-area-inset-top,0px))]",
           align === "end"
             ? "justify-end pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] sm:pb-16 lg:pb-20"
             : "justify-center pb-[calc(2rem+env(safe-area-inset-bottom,0px))]",
@@ -142,6 +148,14 @@ export function HeroSection({
           <Reveal delay={0.22}>
             <p className="mt-5 max-w-xl text-base leading-[1.55] text-pretty text-chalk/85 sm:mt-6 sm:text-lg sm:leading-relaxed">
               {body}
+            </p>
+          </Reveal>
+        ) : null}
+
+        {detail ? (
+          <Reveal delay={0.24}>
+            <p className="eyebrow mt-6 max-w-full text-pretty text-chalk/80 !text-[10px] !tracking-[0.16em] sm:mt-7 sm:!text-[11px] sm:!tracking-[0.2em]">
+              {detail}
             </p>
           </Reveal>
         ) : null}

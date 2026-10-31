@@ -1,12 +1,12 @@
 import { ApplicationForm } from "@/components/ApplicationForm";
+import { CtaLink, Reveal } from "@/components/Reveal";
 import { RetreatDetails } from "@/components/RetreatDetails";
-import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { apply } from "@/content/apply";
 import { home } from "@/content/home";
 import { site } from "@/content/site";
-import { getNextImmersion } from "@/lib/cms";
+import { getFeaturedEvent } from "@/lib/cms";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,11 +15,33 @@ export const metadata: Metadata = {
 };
 
 export default function ApplyPage() {
-  const nextImmersion = getNextImmersion();
+  const event = getFeaturedEvent();
 
   return (
     <>
-      <section className="bg-olive px-5 pb-20 pt-32 text-chalk sm:px-8 lg:px-12 lg:pb-24 lg:pt-40">
+      {event ? (
+        <section className="border-b border-olive/15 bg-chalk px-5 pt-[calc(10.5rem+env(safe-area-inset-top,0px))] pb-12 text-olive sm:px-8 lg:px-12 lg:pt-[calc(12.25rem+env(safe-area-inset-top,0px))] lg:pb-16">
+          <div className="mx-auto max-w-[860px]">
+            <p className="eyebrow">{event.notice.eyebrow}</p>
+            <p className="mt-4 max-w-xl font-heading text-3xl italic leading-snug sm:text-4xl">
+              {event.notice.body}
+            </p>
+            <div className="mt-8">
+              <CtaLink href={event.applyHref} variant="ghost">
+                {event.notice.link}
+              </CtaLink>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <section
+        className={
+          event
+            ? "bg-olive px-5 py-16 text-chalk sm:px-8 lg:px-12 lg:py-24"
+            : "bg-olive px-5 pb-20 pt-32 text-chalk sm:px-8 lg:px-12 lg:pb-24 lg:pt-40"
+        }
+      >
         <div className="mx-auto max-w-[1440px]">
           <Reveal>
             <SectionLabel tone="chalk">{apply.hero.eyebrow}</SectionLabel>
@@ -32,7 +54,7 @@ export default function ApplyPage() {
           </Reveal>
           <div className="mt-12 text-chalk">
             <RetreatDetails
-              retreat={nextImmersion}
+              retreat={event?.retreat ?? null}
               comingSoonLabel={home.application.comingSoon}
               tone="chalk"
             />
@@ -49,7 +71,7 @@ export default function ApplyPage() {
 
       <section
         id={apply.waitlist.id}
-        className="scroll-mt-24 bg-stone px-5 py-20 text-olive sm:px-8 lg:px-12 lg:py-28"
+        className="bg-stone px-5 py-20 text-olive sm:px-8 lg:px-12 lg:py-28"
       >
         <div className="mx-auto max-w-[860px]">
           <Reveal>

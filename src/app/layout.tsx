@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope, Public_Sans } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 import { site } from "@/content/site";
+import { getFeaturedEvent, linksForFeatured } from "@/lib/cms";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -54,6 +55,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const featured = getFeaturedEvent();
+
   return (
     <html
       lang="en"
@@ -64,7 +67,10 @@ export default function RootLayout({
           Skip to content
         </a>
         <div className="grain" aria-hidden />
-        <Navigation />
+        <Navigation
+          featured={featured}
+          links={linksForFeatured(site.navigation.links, featured)}
+        />
         <main id="main">{children}</main>
         <Footer />
       </body>
