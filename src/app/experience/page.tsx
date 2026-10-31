@@ -3,10 +3,12 @@ import { EditorialStatement } from "@/components/EditorialStatement";
 import { HeroSection } from "@/components/HeroSection";
 import { ImageTextSection } from "@/components/ImageTextSection";
 import { MediaGallery } from "@/components/MediaGallery";
+import { NextImmersionCallout } from "@/components/NextImmersionCallout";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { experience } from "@/content/experience";
 import { site } from "@/content/site";
+import { getFeaturedEvent } from "@/lib/cms";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,6 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
+  const event = getFeaturedEvent();
+
   return (
     <>
       <HeroSection
@@ -24,6 +28,7 @@ export default function ExperiencePage() {
         image={experience.hero.image}
         primaryCta={experience.hero.cta}
         size="page"
+        clearance={event ? "announcement" : "header"}
       />
 
       <section className="bg-chalk px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
@@ -63,6 +68,8 @@ export default function ExperiencePage() {
           <MediaGallery items={experience.gallery} />
         </div>
       </section>
+
+      <NextImmersionCallout />
 
       <CTASection
         headline={experience.cta.headline}

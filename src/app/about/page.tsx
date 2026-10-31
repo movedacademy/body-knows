@@ -1,7 +1,9 @@
+import { NextImmersionCallout } from "@/components/NextImmersionCallout";
 import { CtaLink, Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { about } from "@/content/about";
 import { site } from "@/content/site";
+import { getFeaturedEvent } from "@/lib/cms";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -11,9 +13,17 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const event = getFeaturedEvent();
+
   return (
     <>
-      <section className="relative isolate min-h-[88svh] overflow-hidden bg-olive text-chalk">
+      <section
+        className={
+          event
+            ? "relative isolate min-h-[100svh] overflow-hidden bg-olive text-chalk"
+            : "relative isolate min-h-[88svh] overflow-hidden bg-olive text-chalk"
+        }
+      >
         <Image
           src={about.hero.image.src}
           alt={about.hero.image.alt}
@@ -23,7 +33,13 @@ export default function AboutPage() {
           className="object-cover object-[center_40%] grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-olive via-olive/50 to-olive/25" />
-        <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-[1440px] flex-col justify-end px-5 py-16 sm:px-8 lg:px-12">
+        <div
+          className={
+            event
+              ? "relative z-10 mx-auto flex min-h-[100svh] max-w-[1440px] flex-col justify-end px-5 pt-[calc(8.25rem+env(safe-area-inset-top,0px))] pb-16 sm:px-8 sm:pt-[calc(8rem+env(safe-area-inset-top,0px))] lg:px-12"
+              : "relative z-10 mx-auto flex min-h-[88svh] max-w-[1440px] flex-col justify-end px-5 py-16 sm:px-8 lg:px-12"
+          }
+        >
           <SectionLabel tone="chalk">{about.hero.eyebrow}</SectionLabel>
           <h1 className="mt-5 font-display font-light leading-[0.9] tracking-[-0.03em] text-5xl sm:text-7xl lg:text-8xl">
             {about.hero.title}
@@ -31,7 +47,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-chalk px-5 py-24 text-olive sm:px-8 lg:px-12 lg:py-32">
+      <section className="bg-chalk px-5 pt-24 text-olive sm:px-8 lg:px-12 lg:pt-32">
         <div className="mx-auto max-w-[860px] space-y-20">
           {about.sections.map((section, index) => (
             <Reveal key={section.headline} delay={index * 0.05}>
@@ -43,6 +59,13 @@ export default function AboutPage() {
               </p>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <NextImmersionCallout />
+
+      <section className="bg-chalk px-5 py-20 text-olive sm:px-8 lg:px-12 lg:py-28">
+        <div className="mx-auto max-w-[860px]">
           <Reveal>
             <p className="border-t border-olive/15 pt-12 font-heading text-3xl leading-snug sm:text-4xl">
               {about.closing}

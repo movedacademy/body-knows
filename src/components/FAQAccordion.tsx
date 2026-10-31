@@ -2,6 +2,7 @@
 
 import { Reveal } from "@/components/Reveal";
 import type { FaqItem } from "@/types/content";
+import Link from "next/link";
 import { useState } from "react";
 
 type FAQAccordionProps = {
@@ -44,7 +45,15 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
               hidden={!isOpen}
               className="pb-8 pr-8 text-base leading-relaxed text-olive/80 sm:max-w-3xl sm:text-lg"
             >
-              {item.answer}
+              <p>{item.answer}</p>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="mt-5 inline-block text-[11px] tracking-[0.2em] uppercase underline-offset-4 hover:underline"
+                >
+                  {item.linkLabel ?? "View"} →
+                </Link>
+              ) : null}
             </div>
           </Reveal>
         );

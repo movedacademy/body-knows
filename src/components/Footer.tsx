@@ -1,7 +1,11 @@
 import { site } from "@/content/site";
+import { getFeaturedEvent, linksForFeatured } from "@/lib/cms";
 import Link from "next/link";
 
 export function Footer() {
+  const event = getFeaturedEvent();
+  const links = linksForFeatured(site.footer.links, event);
+
   return (
     <footer className="bg-olive text-chalk">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-16 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
@@ -11,15 +15,28 @@ export function Footer() {
             {site.footer.line}
           </p>
         </div>
-        <ul className="flex flex-wrap gap-x-8 gap-y-3 text-[12px] tracking-[0.16em] uppercase text-chalk/70">
-          {site.footer.links.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href} className="transition-colors hover:text-chalk">
-                {link.label}
+        <div className="lg:text-right">
+          {event ? (
+            <div className="mb-8">
+              <p className="eyebrow text-chalk/60">Next immersion</p>
+              <Link
+                href={event.href}
+                className="mt-3 inline-block max-w-full font-heading text-2xl italic leading-snug text-chalk transition-opacity hover:opacity-80 sm:text-3xl"
+              >
+                {event.label}
               </Link>
-            </li>
-          ))}
-        </ul>
+            </div>
+          ) : null}
+          <ul className="flex flex-wrap gap-x-8 gap-y-3 text-[12px] tracking-[0.16em] uppercase text-chalk/70 lg:justify-end">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="transition-colors hover:text-chalk">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </footer>
   );

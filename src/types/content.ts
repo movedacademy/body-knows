@@ -36,6 +36,8 @@ export type ExperienceComponent = {
 export type FaqItem = {
   question: string;
   answer: string;
+  href?: string;
+  linkLabel?: string;
 };
 
 export type RetreatStatus = "upcoming" | "coming_soon" | "past";
@@ -53,6 +55,39 @@ export type Retreat = {
   itinerarySummary?: string;
   inclusions?: string[];
   notes?: string;
+  href?: string;
+  applyHref?: string;
+};
+
+export type FeaturedEvent = {
+  retreat: Retreat;
+  name: string;
+  href: string;
+  applyHref: string;
+  label: string;
+  dateLabel: string;
+  location: string;
+  city: string;
+  country: string;
+  year: string;
+  month: string;
+  menuDetail: string;
+  navLabel: string;
+  applyLabel: string;
+  seeLabel: string;
+  waitlistLabel: string;
+  heroDetail: string;
+  announcement: {
+    desktop: string;
+    mobile: string;
+    ariaLabel: string;
+  };
+  headline: readonly [string, string];
+  notice: {
+    eyebrow: string;
+    body: string;
+    link: string;
+  };
 };
 
 export type FormField = {

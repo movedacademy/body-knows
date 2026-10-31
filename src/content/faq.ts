@@ -1,4 +1,4 @@
-import type { FaqItem } from "@/types/content";
+import type { FaqItem, FeaturedEvent } from "@/types/content";
 
 export const faq = {
   hero: {
@@ -45,3 +45,12 @@ export const faq = {
     secondaryCta: { label: "EXPLORE THE EXPERIENCE", href: "/experience" },
   },
 };
+
+export function nextImmersionFaq(event: FeaturedEvent): FaqItem {
+  return {
+    question: "When is the next immersion?",
+    answer: `${event.name} takes place ${event.dateLabel}, in ${event.location}. Applications are open now. Full travel and practical details are shared with accepted applicants.`,
+    href: event.href,
+    linkLabel: `View the ${event.country} immersion`,
+  };
+}
