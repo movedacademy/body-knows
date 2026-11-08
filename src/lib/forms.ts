@@ -82,6 +82,52 @@ export function validateApplication(
   };
 }
 
+export type ItalyInquiryPayload = {
+  fullName: string;
+  email: string;
+  phone: string;
+  message: string;
+};
+
+export function validateItalyInquiry(
+  input: Record<string, unknown>,
+): { ok: true; data: ItalyInquiryPayload } | { ok: false; error: string } {
+  if (!isNonEmptyString(input.fullName)) {
+    return { ok: false, error: "Please enter your name." };
+  }
+
+  if (!isNonEmptyString(input.email) || !isEmail(String(input.email))) {
+    return { ok: false, error: "Please enter a valid email address." };
+  }
+
+  const message = isNonEmptyString(input.message)
+    ? String(input.message)
+    : isNonEmptyString(input.question)
+      ? String(input.question)
+      : "";
+
+  if (!message.trim()) {
+    return { ok: false, error: "Please tell us what you would like to know." };
+  }
+
+  if (input.consent !== true) {
+    return {
+      ok: false,
+      error: "Please agree to be contacted about your questions.",
+    };
+  }
+
+  return {
+    ok: true,
+    data: {
+      fullName: String(input.fullName).trim(),
+      email: String(input.email).trim(),
+      phone: isNonEmptyString(input.phone) ? String(input.phone).trim() : "",
+      message: message.trim(),
+    },
+  };
+}
+
 export function validateWaitlist(
   input: Record<string, unknown>,
 ): { ok: true; data: WaitlistPayload } | { ok: false; error: string } {

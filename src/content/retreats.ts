@@ -26,7 +26,7 @@ export const retreats: Retreat[] = [
     endDate: "2027-07-09",
     location: "Cossano, Italy",
     href: "/italy",
-    applyHref: "/italy#apply",
+    applyHref: "/italy#questions",
     registrationHref: italyTicketHref("/italy"),
   },
 ];

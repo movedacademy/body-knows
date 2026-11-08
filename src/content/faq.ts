@@ -49,7 +49,7 @@ export const faq = {
 export function nextImmersionFaq(event: FeaturedEvent): FaqItem {
   return {
     question: "When is the next immersion?",
-    answer: `${event.name} takes place ${event.dateLabel}, in ${event.location}. Applications are open now. Full travel and practical details are shared with accepted applicants.`,
+    answer: `${event.name} takes place ${event.dateLabel}, in ${event.location}. You can reserve your place directly. A call is optional if you have questions. Full travel and practical details are shared with participants.`,
     href: event.href,
     linkLabel: `View the ${event.country} immersion`,
   };

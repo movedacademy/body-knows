@@ -16,7 +16,7 @@ export function NextImmersionCallout() {
         </div>
         <div className="lg:justify-self-end">
           <p className="max-w-sm text-lg leading-relaxed text-olive/85">
-            Applications are open for a small group.
+            Reserve your place directly. A call is optional if you have questions.
           </p>
           <div className="mt-6">
             <CtaLink href={event.registrationHref}>{event.applyLabel}</CtaLink>

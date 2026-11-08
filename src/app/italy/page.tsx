@@ -1,5 +1,5 @@
 import { FAQAccordion } from "@/components/FAQAccordion";
-import { ItalyApplyForm } from "@/components/ItalyApplyForm";
+import { ItalyInquiryForm } from "@/components/ItalyInquiryForm";
 import { ItalyPricing } from "@/components/ItalyPricing";
 import { ItalyStickyCta } from "@/components/ItalyStickyCta";
 import { CtaLink, Reveal } from "@/components/Reveal";
@@ -111,17 +111,25 @@ export default function ItalyPage() {
             <CtaLink
               href={italy.hero.primaryCta.href}
               variant="invert"
-              className="min-h-11 w-full sm:w-auto sm:min-w-[15.5rem]"
+              className="min-h-11 w-full text-center whitespace-normal sm:w-auto sm:min-w-[15.5rem]"
             >
               {italy.hero.primaryCta.label}
             </CtaLink>
             <CtaLink
               href={italy.hero.secondaryCta.href}
               variant="secondary"
-              className="min-h-11 w-full sm:w-auto sm:min-w-[15.5rem]"
+              className="min-h-11 w-full px-4 text-center tracking-[0.14em] whitespace-normal sm:w-auto sm:min-w-[15.5rem] sm:tracking-[0.16em]"
             >
               {italy.hero.secondaryCta.label}
             </CtaLink>
+          </Reveal>
+          <Reveal delay={0.32}>
+            <a
+              href={italy.hero.textLink.href}
+              className="mt-4 inline-flex min-h-11 items-center text-[11px] font-medium tracking-[0.22em] text-chalk/75 uppercase underline-offset-4 hover:text-chalk hover:underline"
+            >
+              {italy.hero.textLink.label}
+            </a>
           </Reveal>
           <a
             href={`#${italy.opening.id}`}
@@ -355,22 +363,37 @@ export default function ItalyPage() {
       <ItalyPricing />
 
       <section
-        id={italy.apply.id}
+        id={italy.questions.id}
         className="bg-olive px-5 py-24 text-chalk min-[375px]:px-6 sm:px-8 lg:px-12 lg:py-32"
       >
         <div className="mx-auto max-w-[1440px]">
-          <Reveal className="max-w-2xl">
+          <Reveal className="max-w-3xl">
             <h2 className="font-heading text-[clamp(2.6rem,6vw,5.5rem)] leading-[0.9] tracking-[-0.03em]">
-              {italy.apply.headline}
+              {italy.questions.headline}
             </h2>
             <div className="mt-8 space-y-5 text-lg leading-relaxed text-chalk/85">
-              {italy.apply.body.map((paragraph) => (
+              {italy.questions.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+            <div className="mt-8">
+              <CtaLink
+                href={italy.questions.callCta.href}
+                variant="invert"
+                className="min-h-11 w-full sm:w-auto"
+              >
+                {italy.questions.callCta.label}
+              </CtaLink>
+            </div>
           </Reveal>
-          <div className="mx-auto mt-12 w-full max-w-[820px] lg:mt-16">
-            <ItalyApplyForm />
+          <div
+            id={italy.questions.inquiry.id}
+            className="mx-auto mt-12 w-full max-w-[820px] scroll-mt-32 lg:mt-16"
+          >
+            <p className="mb-8 max-w-xl text-lg leading-relaxed text-chalk/85">
+              {italy.questions.supporting}
+            </p>
+            <ItalyInquiryForm />
           </div>
         </div>
       </section>
@@ -405,7 +428,7 @@ export default function ItalyPage() {
               {italy.finalCta.detail}
             </p>
           </Reveal>
-          <Reveal delay={0.14} className="mt-10">
+          <Reveal delay={0.14} className="mt-10 flex flex-col items-start gap-2">
             <CtaLink
               href={italy.finalCta.cta.href}
               variant="invert"
@@ -413,6 +436,12 @@ export default function ItalyPage() {
             >
               {italy.finalCta.cta.label}
             </CtaLink>
+            <a
+              href={italy.finalCta.secondaryCta.href}
+              className="inline-flex min-h-11 items-center text-[11px] font-medium tracking-[0.16em] text-chalk uppercase underline-offset-4 hover:underline sm:tracking-[0.18em]"
+            >
+              {italy.finalCta.secondaryCta.label}
+            </a>
           </Reveal>
         </div>
       </section>
