@@ -57,6 +57,7 @@ export type Retreat = {
   notes?: string;
   href?: string;
   applyHref?: string;
+  registrationHref?: string;
 };
 
 export type FeaturedEvent = {
@@ -64,6 +65,7 @@ export type FeaturedEvent = {
   name: string;
   href: string;
   applyHref: string;
+  registrationHref: string;
   label: string;
   dateLabel: string;
   location: string;

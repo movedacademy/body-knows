@@ -27,10 +27,10 @@ export function generateMetadata(): Metadata {
 export default function HomePage() {
   const event = getFeaturedEvent();
   const heroPrimary = event
-    ? { label: event.applyLabel, href: event.applyHref }
+    ? { label: event.applyLabel, href: event.registrationHref }
     : home.hero.restingCta;
   const applicationPrimary = event
-    ? { label: event.applyLabel, href: event.applyHref }
+    ? { label: event.applyLabel, href: event.registrationHref }
     : home.application.restingCta;
   const applicationSecondary = event
     ? { label: event.waitlistLabel, href: home.application.secondaryCta.href }

@@ -2,6 +2,7 @@
 
 import { EventAnnouncement } from "@/components/EventAnnouncement";
 import { SectionLabel } from "@/components/SectionLabel";
+import { italyTicketHref } from "@/content/italy-checkout";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
 import type { FeaturedEvent, NavLink } from "@/types/content";
@@ -66,9 +67,9 @@ export function Navigation({
   const solid = scrolled || !isHome || open;
   const { secondaryCta } = site.navigation;
   const headerCta = isItaly
-    ? { label: site.navigation.primaryCta.label, href: "#apply" }
+    ? { label: site.navigation.primaryCta.label, href: italyTicketHref() }
     : featured
-      ? { label: featured.applyLabel, href: featured.applyHref }
+      ? { label: featured.applyLabel, href: featured.registrationHref }
       : site.navigation.restingCta;
 
   return (

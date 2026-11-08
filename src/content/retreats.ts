@@ -1,3 +1,4 @@
+import { italyTicketHref } from "@/content/italy-checkout";
 import type { Retreat } from "@/types/content";
 
 /**
@@ -26,5 +27,6 @@ export const retreats: Retreat[] = [
     location: "Cossano, Italy",
     href: "/italy",
     applyHref: "/italy#apply",
+    registrationHref: italyTicketHref("/italy"),
   },
 ];

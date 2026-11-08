@@ -1,3 +1,4 @@
+import { italyTicketHref } from "@/content/italy-checkout";
 import type { Cta, NavLink } from "@/types/content";
 
 export const site = {
@@ -14,7 +15,7 @@ export const site = {
       { label: "FAQ", href: "/faq" },
       { label: "Apply", href: "/apply" },
     ] satisfies NavLink[],
-    primaryCta: { label: "APPLY FOR ITALY", href: "/italy#apply" } satisfies Cta,
+    primaryCta: { label: "APPLY FOR ITALY", href: italyTicketHref("/italy") } satisfies Cta,
     restingCta: { label: "APPLY", href: "/apply" } satisfies Cta,
     secondaryCta: {
       label: "EXPLORE THE EXPERIENCE",

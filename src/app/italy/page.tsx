@@ -1,5 +1,6 @@
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { ItalyApplyForm } from "@/components/ItalyApplyForm";
+import { ItalyPricing } from "@/components/ItalyPricing";
 import { ItalyStickyCta } from "@/components/ItalyStickyCta";
 import { CtaLink, Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
@@ -350,6 +351,8 @@ export default function ItalyPage() {
           </div>
         </div>
       </section>
+
+      <ItalyPricing />
 
       <section
         id={italy.apply.id}
