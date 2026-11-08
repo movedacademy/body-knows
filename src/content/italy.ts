@@ -53,7 +53,7 @@ export const italy = {
       "An immersive movement, breath, and transformation experience for people who know something needs to change—but haven’t been able to change it through thinking alone.",
     detail: "Cossano, Italy · July 5–9, 2027",
     primaryCta: { label: "RESERVE YOUR PLACE", href: italyTicketHref() },
-    secondaryCta: { label: "HAVE QUESTIONS? BOOK A CALL", href: "#questions" },
+    secondaryCta: { label: "HAVE QUESTIONS? BOOK A CALL", href: "#calendar" },
     textLink: { label: "EXPLORE THE EXPERIENCE", href: "#experience" },
     image: italyImage(
       "/images/italy/hero.jpg",
@@ -210,7 +210,7 @@ export const italy = {
       "Choose the room arrangement that works for you. Each option takes you directly to secure checkout.",
     questionsLink: {
       label: "Have questions before booking? Talk with us first.",
-      href: "#questions",
+      href: "#calendar",
     },
     options: [
       {
@@ -265,7 +265,11 @@ export const italy = {
       "You might want to know more about the physical work, the setting, or whether BODY KNOWS is right for you.",
       "Book a call with us. Ask what you need to ask before deciding.",
     ],
-    callCta: { label: "BOOK A CALL", href: "#inquiry" },
+    calendar: {
+      id: "calendar",
+      title: "Book a call with Richard Aceves",
+      src: "https://scheduler.zoom.us/richard-aceves/strategy-call?embedStyle=%7B%22backgroundColor%22%3A%22%23d6d1c5%22%2C%22buttonColor%22%3A%22%23485958%22%7D&embed=true",
+    },
     supporting:
       "Prefer that we contact you? Leave your details and tell us what you’d like to know.",
     inquiry: {
@@ -317,7 +321,7 @@ export const italy = {
     headline: "CAN YOU LISTEN?",
     detail: "July 5–9, 2027 · Cossano, Italy",
     cta: { label: "RESERVE YOUR PLACE", href: italyTicketHref() },
-    secondaryCta: { label: "HAVE QUESTIONS? BOOK A CALL", href: "#questions" },
+    secondaryCta: { label: "HAVE QUESTIONS? BOOK A CALL", href: "#calendar" },
     image: italyImage(
       "/images/italy/final.jpg",
       "A participant standing with his back to the camera, looking out over the hills.",
