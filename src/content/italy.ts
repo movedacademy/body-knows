@@ -1,3 +1,9 @@
+import {
+  italyCheckoutLinks,
+  italyTicketHref,
+  italyTicketSectionId,
+  type ItalyCheckoutKey,
+} from "@/content/italy-checkout";
 import { media } from "@/content/media";
 import type { FaqItem, MediaAsset } from "@/types/content";
 
@@ -46,7 +52,7 @@ export const italy = {
     supporting:
       "An immersive movement, breath, and transformation experience for people who know something needs to change—but haven’t been able to change it through thinking alone.",
     detail: "Cossano, Italy · July 5–9, 2027",
-    primaryCta: { label: "APPLY FOR ITALY", href: "#apply" },
+    primaryCta: { label: "APPLY FOR ITALY", href: italyTicketHref() },
     secondaryCta: { label: "EXPLORE THE EXPERIENCE", href: "#experience" },
     image: italyImage(
       "/images/italy/hero.jpg",
@@ -195,6 +201,57 @@ export const italy = {
     body: "Richard works at the intersection of movement, physical challenge, breath, and human behavior. BODY KNOWS is built around a simple premise: insight matters, but experience can reveal what thought alone cannot.",
     image: media.founder,
   },
+  pricing: {
+    id: italyTicketSectionId,
+    eyebrow: "Registration",
+    headline: "CHOOSE YOUR ROOM",
+    intro: "Each option continues to its own checkout.",
+    options: [
+      {
+        id: "one-participant-private-room",
+        title: "1 Participant / Private Room",
+        price: "$3,794.40 USD",
+        label: "Early Bird — 10% Off",
+        description:
+          "Registration for one participant with private-room accommodation.",
+        button: "Reserve My Private Room",
+        checkoutKey: "oneParticipantPrivateRoom",
+      },
+      {
+        id: "one-participant-shared-room",
+        title: "1 Participant / Shared Room",
+        price: "$3,359.70 USD",
+        label: "Early Bird — 10% Off",
+        description:
+          "Registration for one participant with shared-room accommodation.",
+        button: "Reserve My Shared Room",
+        checkoutKey: "oneParticipantSharedRoom",
+      },
+      {
+        id: "two-participants-private-room",
+        title: "2 Participants / Private Room",
+        price: "$3,344.40 USD",
+        perPerson: true,
+        total: "Total: $6,688.80 USD for two participants",
+        label: "Early Bird — 10% Off",
+        description:
+          "Registration for two participants sharing one private room. One purchase covers both participants.",
+        button: "Reserve for Two",
+        checkoutKey: "twoParticipantsPrivateRoom",
+      },
+    ] satisfies Array<{
+      id: string;
+      title: string;
+      price: string;
+      perPerson?: boolean;
+      total?: string;
+      label: string;
+      description: string;
+      button: string;
+      checkoutKey: ItalyCheckoutKey;
+    }>,
+    checkout: italyCheckoutLinks,
+  },
   apply: {
     id: "apply",
     headline: "APPLY FOR ITALY",
@@ -240,7 +297,7 @@ export const italy = {
   finalCta: {
     headline: "CAN YOU LISTEN?",
     detail: "July 5–9, 2027 · Cossano, Italy",
-    cta: { label: "APPLY FOR ITALY", href: "#apply" },
+    cta: { label: "APPLY FOR ITALY", href: italyTicketHref() },
     image: italyImage(
       "/images/italy/final.jpg",
       "A participant standing with his back to the camera, looking out over the hills.",

@@ -42,7 +42,7 @@ export function FeaturedEvent() {
             </p>
           </Reveal>
           <Reveal delay={0.14} className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <CtaLink href={event.applyHref}>{event.applyLabel}</CtaLink>
+            <CtaLink href={event.registrationHref}>{event.applyLabel}</CtaLink>
             <CtaLink href={event.href} variant="ghost">
               {event.seeLabel}
             </CtaLink>

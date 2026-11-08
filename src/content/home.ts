@@ -1,3 +1,4 @@
+import { italyTicketHref } from "@/content/italy-checkout";
 import { media } from "@/content/media";
 import type { ExploreItem, ExperienceVisual } from "@/types/content";
 
@@ -8,7 +9,7 @@ export const home = {
     body: "An immersive experience for people who know something needs to change—but haven’t been able to change it through thinking alone.",
     primaryCta: {
       label: "APPLY FOR ITALY",
-      href: "/italy#apply",
+      href: italyTicketHref("/italy"),
     },
     restingCta: {
       label: "APPLY FOR THE NEXT IMMERSION",
@@ -113,7 +114,7 @@ export const home = {
     comingSoon: "Next immersion details coming soon.",
     primaryCta: {
       label: "APPLY FOR ITALY",
-      href: "/italy#apply",
+      href: italyTicketHref("/italy"),
     },
     restingCta: {
       label: "APPLY FOR THE NEXT IMMERSION",

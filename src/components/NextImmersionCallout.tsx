@@ -19,7 +19,7 @@ export function NextImmersionCallout() {
             Applications are open for a small group.
           </p>
           <div className="mt-6">
-            <CtaLink href={event.applyHref}>{event.applyLabel}</CtaLink>
+            <CtaLink href={event.registrationHref}>{event.applyLabel}</CtaLink>
           </div>
         </div>
       </div>

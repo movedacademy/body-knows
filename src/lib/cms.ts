@@ -3,6 +3,7 @@ import { apply } from "@/content/apply";
 import { experience } from "@/content/experience";
 import { faq } from "@/content/faq";
 import { home } from "@/content/home";
+import { italyTicketHref } from "@/content/italy-checkout";
 import { media } from "@/content/media";
 import { retreats } from "@/content/retreats";
 import { site } from "@/content/site";
@@ -114,6 +115,7 @@ export function getFeaturedEvent(now = new Date()): FeaturedEvent | null {
   const year = String(start.year);
   const href = retreat.href ?? "/italy";
   const applyHref = retreat.applyHref ?? `${href}#apply`;
+  const registrationHref = retreat.registrationHref ?? italyTicketHref(href);
   const label = `${retreat.location} · ${dateLabel}`;
   const uppercaseDate = dateLabel.toUpperCase();
 
@@ -122,6 +124,7 @@ export function getFeaturedEvent(now = new Date()): FeaturedEvent | null {
     name: retreat.name,
     href,
     applyHref,
+    registrationHref,
     label,
     dateLabel,
     location: retreat.location,

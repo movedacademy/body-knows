@@ -1,5 +1,6 @@
 "use client";
 
+import { italyTicketHref, italyTicketSectionId } from "@/content/italy-checkout";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -11,11 +12,11 @@ export function ItalyStickyCta() {
 
     const update = () => {
       const hero = document.getElementById("italy-hero");
-      const apply = document.getElementById("apply");
-      if (!hero || !apply) return;
+      const tickets = document.getElementById(italyTicketSectionId);
+      if (!hero || !tickets) return;
       const heroBottom = hero.getBoundingClientRect().bottom;
-      const applyTop = apply.getBoundingClientRect().top;
-      setVisible(heroBottom < 72 && applyTop > window.innerHeight * 0.55);
+      const ticketsTop = tickets.getBoundingClientRect().top;
+      setVisible(heroBottom < 72 && ticketsTop > window.innerHeight * 0.55);
     };
 
     const onScroll = () => {
@@ -44,7 +45,7 @@ export function ItalyStickyCta() {
       aria-hidden={!visible}
     >
       <a
-        href="#apply"
+        href={italyTicketHref()}
         tabIndex={visible ? 0 : -1}
         className="flex min-h-11 items-center justify-center bg-chalk px-5 text-[11px] font-medium tracking-[0.28em] text-olive uppercase"
       >
