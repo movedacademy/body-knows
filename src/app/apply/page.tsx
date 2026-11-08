@@ -27,7 +27,7 @@ export default function ApplyPage() {
               {event.notice.body}
             </p>
             <div className="mt-8">
-              <CtaLink href={event.applyHref} variant="ghost">
+              <CtaLink href={event.registrationHref} variant="ghost">
                 {event.notice.link}
               </CtaLink>
             </div>

@@ -28,6 +28,12 @@ export function ItalyPricing() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-olive/85">
             {pricing.intro}
           </p>
+          <a
+            href={pricing.questionsLink.href}
+            className="mt-6 inline-flex min-h-11 items-center text-base leading-snug text-olive underline decoration-olive/40 underline-offset-4 hover:decoration-olive"
+          >
+            {pricing.questionsLink.label}
+          </a>
         </Reveal>
 
         <div className="mt-14 grid gap-4 lg:grid-cols-3 lg:gap-6">

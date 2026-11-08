@@ -8,7 +8,7 @@ export const home = {
     title: "Your body knows things your mind hasn’t figured out yet.",
     body: "An immersive experience for people who know something needs to change—but haven’t been able to change it through thinking alone.",
     primaryCta: {
-      label: "APPLY FOR ITALY",
+      label: "RESERVE YOUR PLACE",
       href: italyTicketHref("/italy"),
     },
     restingCta: {
@@ -113,7 +113,7 @@ export const home = {
     body: "The next BODY KNOWS immersion is for a small group of people ready to step outside their usual environment and participate fully.",
     comingSoon: "Next immersion details coming soon.",
     primaryCta: {
-      label: "APPLY FOR ITALY",
+      label: "RESERVE YOUR PLACE",
       href: italyTicketHref("/italy"),
     },
     restingCta: {

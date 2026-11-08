@@ -1,4 +1,4 @@
-import { validateApplication } from "@/lib/forms";
+import { validateApplication, validateItalyInquiry } from "@/lib/forms";
 import { FORM_SOURCES } from "@/lib/lead-constants";
 import {
   LEAD_SEND_ERROR,
@@ -41,6 +41,36 @@ export async function POST(request: Request) {
     return Response.json({ success: true });
   }
 
+  if (body.form_source === FORM_SOURCES.italyInquiry) {
+    const inquiry = validateItalyInquiry(body);
+    if (!inquiry.ok) {
+      return Response.json(
+        { success: false, error: inquiry.error },
+        { status: 400 },
+      );
+    }
+
+    const lead = normalizeLead({
+      ...inquiry.data,
+      form_source: FORM_SOURCES.italyInquiry,
+      page_url: body.page_url ?? body.pageUrl ?? "",
+    });
+
+    if (!lead.ok) {
+      return Response.json(
+        { success: false, error: lead.error },
+        { status: 400 },
+      );
+    }
+
+    try {
+      await forwardLeadToGhl(lead.data);
+      return Response.json({ success: true });
+    } catch (error) {
+      return leadErrorResponse(error);
+    }
+  }
+
   if (isApplicationPayload(body)) {
     const application = validateApplication(body);
     if (!application.ok) {
@@ -69,19 +99,23 @@ export async function POST(request: Request) {
     await forwardLeadToGhl(lead.data);
     return Response.json({ success: true });
   } catch (error) {
-    const timedOut =
-      error instanceof Error &&
-      (error.name === "TimeoutError" || error.name === "AbortError");
-
-    console.error(
-      timedOut
-        ? "[body-knows] GHL webhook timed out"
-        : "[body-knows] GHL webhook request failed",
-    );
-
-    return Response.json(
-      { success: false, error: LEAD_SEND_ERROR },
-      { status: error instanceof Error && error.message === "missing-webhook" ? 500 : 502 },
-    );
+    return leadErrorResponse(error);
   }
+}
+
+function leadErrorResponse(error: unknown) {
+  const timedOut =
+    error instanceof Error &&
+    (error.name === "TimeoutError" || error.name === "AbortError");
+
+  console.error(
+    timedOut
+      ? "[body-knows] GHL webhook timed out"
+      : "[body-knows] GHL webhook request failed",
+  );
+
+  return Response.json(
+    { success: false, error: LEAD_SEND_ERROR },
+    { status: error instanceof Error && error.message === "missing-webhook" ? 500 : 502 },
+  );
 }

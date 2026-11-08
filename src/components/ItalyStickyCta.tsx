@@ -1,6 +1,7 @@
 "use client";
 
 import { italyTicketHref, italyTicketSectionId } from "@/content/italy-checkout";
+import { italy } from "@/content/italy";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -49,7 +50,7 @@ export function ItalyStickyCta() {
         tabIndex={visible ? 0 : -1}
         className="flex min-h-11 items-center justify-center bg-chalk px-5 text-[11px] font-medium tracking-[0.28em] text-olive uppercase"
       >
-        Apply for Italy
+        {italy.hero.primaryCta.label}
       </a>
     </div>
   );

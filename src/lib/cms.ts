@@ -114,7 +114,7 @@ export function getFeaturedEvent(now = new Date()): FeaturedEvent | null {
   const month = monthName(start.month);
   const year = String(start.year);
   const href = retreat.href ?? "/italy";
-  const applyHref = retreat.applyHref ?? `${href}#apply`;
+  const applyHref = retreat.applyHref ?? `${href}#questions`;
   const registrationHref = retreat.registrationHref ?? italyTicketHref(href);
   const label = `${retreat.location} · ${dateLabel}`;
   const uppercaseDate = dateLabel.toUpperCase();
@@ -134,20 +134,20 @@ export function getFeaturedEvent(now = new Date()): FeaturedEvent | null {
     month,
     menuDetail: `${city} · ${menuSpan(retreat.startDate, retreat.endDate, dateLabel)}`,
     navLabel: `${country} ${year}`,
-    applyLabel: `APPLY FOR ${country.toUpperCase()}`,
+    applyLabel: "RESERVE YOUR PLACE",
     seeLabel: `SEE THE ${country.toUpperCase()} IMMERSION`,
     waitlistLabel: `CAN’T MAKE ${month.toUpperCase()}? JOIN THE WAITLIST`,
     heroDetail: `Next immersion · ${label}`,
     announcement: {
-      desktop: `${retreat.name.toUpperCase()} · ${city.toUpperCase()} · ${uppercaseDate} — APPLICATIONS OPEN →`,
-      mobile: `${country.toUpperCase()} · ${uppercaseDate} · APPLY →`,
-      ariaLabel: `${retreat.name}, ${city}, ${dateLabel}. Applications open. View the ${country} immersion.`,
+      desktop: `${retreat.name.toUpperCase()} · ${city.toUpperCase()} · ${uppercaseDate} — RESERVE YOUR PLACE →`,
+      mobile: `${country.toUpperCase()} · ${uppercaseDate} · RESERVE →`,
+      ariaLabel: `${retreat.name}, ${city}, ${dateLabel}. Reserve your place.`,
     },
     headline: [`${city.toUpperCase()}, ${country.toUpperCase()}.`, `${uppercaseDate}.`],
     notice: {
-      eyebrow: `Applying for ${country}?`,
-      body: `The ${month} ${year} immersion in ${city} has its own application.`,
-      link: `Go to the ${country} application →`,
+      eyebrow: `Reserving ${country}?`,
+      body: `The ${month} ${year} immersion in ${city} can be reserved directly. A call is optional if you have questions.`,
+      link: "Reserve your place →",
     },
   };
 }

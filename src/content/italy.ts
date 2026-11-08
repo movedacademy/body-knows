@@ -52,8 +52,9 @@ export const italy = {
     supporting:
       "An immersive movement, breath, and transformation experience for people who know something needs to change—but haven’t been able to change it through thinking alone.",
     detail: "Cossano, Italy · July 5–9, 2027",
-    primaryCta: { label: "APPLY FOR ITALY", href: italyTicketHref() },
-    secondaryCta: { label: "EXPLORE THE EXPERIENCE", href: "#experience" },
+    primaryCta: { label: "RESERVE YOUR PLACE", href: italyTicketHref() },
+    secondaryCta: { label: "HAVE QUESTIONS? BOOK A CALL", href: "#questions" },
+    textLink: { label: "EXPLORE THE EXPERIENCE", href: "#experience" },
     image: italyImage(
       "/images/italy/hero.jpg",
       "Participants lying on a stone terrace in the hills, working with breath while a facilitator stands nearby.",
@@ -172,7 +173,7 @@ export const italy = {
     headline: "COSSANO, ITALY",
     body: "Five days away from the usual environment. Long enough to interrupt familiar momentum. Close enough to what matters to notice what is usually missed.",
     detail: "July 5–9, 2027 · Cossano, Italy",
-    note: "Full travel and practical details will be shared with accepted applicants.",
+    note: "Full travel and practical details will be shared with participants.",
     images: [
       italyImage(
         "/images/italy/place-terrace.jpg",
@@ -203,9 +204,14 @@ export const italy = {
   },
   pricing: {
     id: italyTicketSectionId,
-    eyebrow: "Registration",
-    headline: "CHOOSE YOUR ROOM",
-    intro: "Each option continues to its own checkout.",
+    eyebrow: "Italy",
+    headline: "RESERVE YOUR PLACE",
+    intro:
+      "Choose the room arrangement that works for you. Each option takes you directly to secure checkout.",
+    questionsLink: {
+      label: "Have questions before booking? Talk with us first.",
+      href: "#questions",
+    },
     options: [
       {
         id: "one-participant-private-room",
@@ -213,7 +219,7 @@ export const italy = {
         price: "$3,794.40 USD",
         label: "Early Bird — 10% Off",
         description:
-          "Registration for one participant with private-room accommodation.",
+          "Participation in BODY KNOWS for one person, with a private room.",
         button: "Reserve My Private Room",
         checkoutKey: "oneParticipantPrivateRoom",
       },
@@ -223,7 +229,7 @@ export const italy = {
         price: "$3,359.70 USD",
         label: "Early Bird — 10% Off",
         description:
-          "Registration for one participant with shared-room accommodation.",
+          "Participation in BODY KNOWS for one person, with a shared room.",
         button: "Reserve My Shared Room",
         checkoutKey: "oneParticipantSharedRoom",
       },
@@ -235,7 +241,7 @@ export const italy = {
         total: "Total: $6,688.80 USD for two participants",
         label: "Early Bird — 10% Off",
         description:
-          "Registration for two participants sharing one private room. One purchase covers both participants.",
+          "Participation in BODY KNOWS for two people sharing one private room. One purchase covers both participants.",
         button: "Reserve for Two",
         checkoutKey: "twoParticipantsPrivateRoom",
       },
@@ -252,13 +258,26 @@ export const italy = {
     }>,
     checkout: italyCheckoutLinks,
   },
-  apply: {
-    id: "apply",
-    headline: "APPLY FOR ITALY",
+  questions: {
+    id: "questions",
+    headline: "CURIOUS, BUT HAVE QUESTIONS?",
     body: [
-      "BODY KNOWS is a small, personal experience. The application is the first conversation—not a test.",
-      "Tell us what is bringing you here. After applying, you’ll have the option to book a short call or hear from us directly.",
+      "You might want to know more about the physical work, the setting, or whether BODY KNOWS is right for you.",
+      "Book a call with us. Ask what you need to ask before deciding.",
     ],
+    callCta: { label: "BOOK A CALL", href: "#inquiry" },
+    supporting:
+      "Prefer that we contact you? Leave your details and tell us what you’d like to know.",
+    inquiry: {
+      id: "inquiry",
+      nameLabel: "Name",
+      emailLabel: "Email",
+      phoneLabel: "Phone (optional)",
+      questionLabel: "What would you like to know?",
+      consent: "I agree to be contacted about my questions.",
+      submit: "GET IN TOUCH",
+      confirmation: "Thanks for getting in touch. We’ll respond to your questions.",
+    },
   },
   faq: {
     headline: "FAQ",
@@ -288,16 +307,17 @@ export const italy = {
           "Each person’s experience is different. BODY KNOWS is designed to create conditions for exploration, challenge, and reflection; it does not promise a specific outcome.",
       },
       {
-        question: "What happens after I apply?",
+        question: "Can I speak with someone before booking?",
         answer:
-          "We review your application. You will have the option to book a short call, and we will contact you directly if appropriate.",
+          "Yes. Book a call or send us your questions before deciding. If you’re ready, you can reserve your place directly on this page.",
       },
     ] satisfies FaqItem[],
   },
   finalCta: {
     headline: "CAN YOU LISTEN?",
     detail: "July 5–9, 2027 · Cossano, Italy",
-    cta: { label: "APPLY FOR ITALY", href: italyTicketHref() },
+    cta: { label: "RESERVE YOUR PLACE", href: italyTicketHref() },
+    secondaryCta: { label: "HAVE QUESTIONS? BOOK A CALL", href: "#questions" },
     image: italyImage(
       "/images/italy/final.jpg",
       "A participant standing with his back to the camera, looking out over the hills.",
