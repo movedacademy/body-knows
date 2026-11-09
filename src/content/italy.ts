@@ -268,7 +268,7 @@ export const italy = {
     calendar: {
       id: "calendar",
       title: "Book a call with Richard Aceves",
-      src: "https://scheduler.zoom.us/richard-aceves/strategy-call?embedStyle=%7B%22backgroundColor%22%3A%22%23d6d1c5%22%2C%22buttonColor%22%3A%22%23485958%22%7D&embed=true",
+      src: "https://scheduler.zoom.us/richard-aceves/bodyknows?embedStyle=%7B%22backgroundColor%22%3A%22%23d6d1c5%22%2C%22buttonColor%22%3A%22%23485958%22%7D&embed=true",
     },
     supporting:
       "Prefer that we contact you? Leave your details and tell us what you’d like to know.",
