@@ -1,4 +1,5 @@
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { ItalyCallCalendar } from "@/components/ItalyCallCalendar";
 import { ItalyInquiryForm } from "@/components/ItalyInquiryForm";
 import { ItalyPricing } from "@/components/ItalyPricing";
 import { ItalyStickyCta } from "@/components/ItalyStickyCta";
@@ -376,16 +377,8 @@ export default function ItalyPage() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-            <div className="mt-8">
-              <CtaLink
-                href={italy.questions.callCta.href}
-                variant="invert"
-                className="min-h-11 w-full sm:w-auto"
-              >
-                {italy.questions.callCta.label}
-              </CtaLink>
-            </div>
           </Reveal>
+          <ItalyCallCalendar />
           <div
             id={italy.questions.inquiry.id}
             className="mx-auto mt-12 w-full max-w-[820px] scroll-mt-32 lg:mt-16"
